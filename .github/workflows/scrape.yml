@@ -2,9 +2,9 @@ name: Actualizar tipo de cambio
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # cada 30 minutos (hora UTC)
-  workflow_dispatch:          # permite ejecutarlo a mano desde GitHub
-
+    - cron: "7,22,37,52 * * * *"
+  workflow_dispatch:
+  
 jobs:
   scrape:
     runs-on: ubuntu-latest
