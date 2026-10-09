@@ -2,7 +2,7 @@ name: Actualizar tipo de cambio
 
 on:
   schedule:
-    - cron: "7,22,37,52 * * * *"
+    - cron: "11,26,41,56 * * * *"
   workflow_dispatch:
   
 jobs:
