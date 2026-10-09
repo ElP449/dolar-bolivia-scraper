@@ -2,7 +2,7 @@ name: Actualizar tipo de cambio
 
 on:
   schedule:
-    - cron: "*/30 * * * *"   # cada 30 minutos (hora UTC)
+    - cron: "*/15 * * * *"   # cada 30 minutos (hora UTC)
   workflow_dispatch:          # permite ejecutarlo a mano desde GitHub
 
 jobs:
