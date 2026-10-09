@@ -1,0 +1,35 @@
+name: Actualizar tipo de cambio
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # cada 30 minutos (hora UTC)
+  workflow_dispatch:          # permite ejecutarlo a mano desde GitHub
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - run: playwright install --with-deps chromium
+
+      - run: python scraper.py
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+
+      # Si algo falla, guarda las capturas de depuración para verlas luego
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: capturas-debug
+          path: debug_*.png
+          if-no-files-found: ignore
